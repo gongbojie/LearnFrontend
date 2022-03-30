@@ -256,3 +256,96 @@ try {
   alert(err.name); // ValidationError
   alert(err.stack); // 一个嵌套调用的列表，每个调用都有对应的行号
 }
+
+class PropertyRequiredError extends ValidationError {
+  constructor(property) {
+    super("No property:" + property);
+    this.name = "PropertyRequiredError";
+    this.property = property;
+  }
+}
+
+class ReadError extends Error {
+  constructor(message, cause) {
+    super(message);
+    this.cause = cause;
+    this.name = "ReadError";
+  }
+}
+
+class ValidationError extends Error{ }
+
+class PropertyRequiredError extends ValidationError { }
+
+function validateUser(user) {
+  if (!user.age) {
+    throw new PropertyRequiredError("age");
+  }
+
+  if (!user.name) {
+    throw new PropertyRequiredError("name");
+  }
+}
+
+function readUser(json) {
+  let userl
+
+  try {
+    user = JSON.parse(json);
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      throw new ReadError("Validattion Error", err);
+    } else {
+      throw err;
+    }
+  }
+}
+
+function loadScript(src, callback) {
+  // 创建一个 <script> 标签， 并将其附加到页面
+  // 这将使得具有给定的src 的脚本开始加载， 并在加载完成后运行
+  let script = document.createElement('script');
+  script.src = src;
+
+  script.onload = () => callback(script);
+  script.onerror = () => callback(new Error('Script load error for ${src}'));
+
+  document.head.append(script);
+}
+
+function reWriteLoadScript(src) {
+  return new Promise(function(resolve, reject) {
+    let script = document.createElement('script');
+    script.src = src;
+
+    script.onload = () => resolve(script);
+    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+
+    document.head.append(script);
+  });
+}
+
+let reWritePromise = reWriteLoadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
+
+reWritePromise.then(
+  script => alert(`${script.src} is loaded!`),
+  error => alert(`Error: ${error.message}`)
+);
+
+promise.then(script => alert('Another handler...'));
+
+
+loadScript('/my/script.js', function(err, script){
+  // 在脚本加载完成后，回调函数才会执行
+
+  if (error) {
+    // 处理 error
+  } else {
+    // 脚本加载成功
+  }
+})
+
+let promise = new Promise(function(resolve, reject) {
+  // executor (生产者代码)
+});
+
