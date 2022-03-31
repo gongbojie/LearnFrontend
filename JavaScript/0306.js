@@ -349,3 +349,119 @@ let promise = new Promise(function(resolve, reject) {
   // executor (生产者代码)
 });
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+delay(3000).then(() => alert('runs after 3 seconds'));
+
+new Promise(function(resolve, reject) {
+  setTimeout(() => resolve(1), 1000);
+}).then(function(result) {
+  alert(result);
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(result * 2), 1000);
+  });
+}).then(function(result) {
+  alert(result);
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(result * 2), 1000);
+  });
+}).then(function(result) {
+  alert(result);
+});
+
+loadScript("/article/promise-chaining/one.js")
+.then(function(script) {
+  return loadScript("/article/promise-chaining/two.js");
+})
+.then(function(script) {
+  return loadScript("/article/promise-chaining/three.js");
+})
+.then(function(script) {
+  // 使用在脚本中声明的函数
+  // 以证明脚本确实被加载完毕了
+  // one();
+  // two();
+  // three();
+});
+
+  // 箭头函数重写
+loadScript("/article/promise-chaining/one.js")
+  .then(script => loadScript("two.js"))
+  .then(script => loadScript("three.js"))
+  .then(script => {
+    // one();
+    // two();
+    // three();
+  });
+
+class Thenable {
+  constructor(num) {
+    this.num = num;
+  }
+  then(resolve, reject) {
+    alert(resolve);
+    setTimeout(() => resolve(this.num * 2), 1000);
+  }
+}
+
+new Promise(resolve => resolve(1))
+  .then(result => {
+    return new Thenable(result);
+  })
+  .then(alert);
+
+
+// 发送一个 user.json请求
+fetch('user.json')
+  // 将其加载为 JSON
+  .then(response => response.json())
+  // 发送一个 Github 的请求
+  .then(user => fetch(`githubSite`))
+  // 将响应加载为 JSON
+  .then(response => response.json())
+  // 显示头像图片 (githubUser.avatar_url) 3秒
+  .then(githubUser => new Promise(function(resolve, reject) {
+    let img = document.createElement('img');
+    img.src = githubUser.avatar_url;
+    img.className = "promise-avatar-example";
+    document.body.append(img);
+
+    setTimeout(() => {
+      img.remove();
+      resolve(githubUser);00
+    }, 3000);
+  }))
+  .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+
+function loadJson(url) {
+  return fetch(url)
+    .then(response => response.json());
+}
+
+function loadGithubUser(name) {
+  return loadJson(`url`);
+}
+
+function showAvatar(githubUser) {
+  return new Promise(function(resolve, reject) {
+    let img = document.createElement('img');
+    img.src = githubUser.avatar_url;
+    img.className = "name";
+    document.body.append(img);
+
+    setTimeout(() => {
+      img.remove();
+      resolve(githubUser);
+    }, 3000);
+  });
+}
+
+// 使用
+loadJson('user.json')
+  .then(user => loadGithubUser(user.name))
+  .then(showAvatar)
+  .then(githubUser => alert(`finish show`));
