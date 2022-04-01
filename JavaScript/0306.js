@@ -465,3 +465,72 @@ loadJson('user.json')
   .then(user => loadGithubUser(user.name))
   .then(showAvatar)
   .then(githubUser => alert(`finish show`));
+
+
+new Promise((resolve, reject) => {
+  reject(new Error("Whoops!"));
+}).catch(alert);
+
+
+new Promise((resolve, reject) => {
+  throw new Error("Whoops!");
+}).catch(function(error) {
+  alert("the error is handled, continue normally");
+}).then(() => alert("Next successful handler runs"));
+
+window.addEventListener('unhandledrejection', function(event) {
+  // 这个时间对象有两个特殊的属性：
+  alert(event.promise); // [object promise] - 生成该全局 error 的 promise
+  alert(event.reason); // Error: Whoops! - 未处理的 error 对象
+});
+
+class HttpError extends Error {
+  constructor(response) {
+    super(`${response.status} for ${response.url}`);
+    this.name = 'HttpError';
+    this.response = response;
+  }
+}
+
+function loadJson(url) {
+  return fetch(url)
+    .then(response => {
+      if (response.status == 200) {
+        return response.json();
+      } else {
+        throw new HttpError(response);
+      }
+    })
+}
+
+loadJson('no-such-user.json')
+  .catch(alert);
+
+
+let urls = [
+  'https://api.github.com/users/iliakan',
+  'https://api.github.com/users/remy',
+  'https://no-such-url'
+];
+
+Promise.allSettled(urls.map(url => fetch(url)))
+  .then(results => {
+    results.forEach((result, num) => {
+      if (result.status == "fulfilled") {
+        alert(`${urls[num]}: ${result.value.status}`);
+      }
+      if (result.status == "rejected") {
+        alert(`${urls[num]}: ${result.reason}`);
+      }
+    });
+  });
+
+if (!Promise.allSettled) {
+  const rejectHandler = reason => ({ status: 'rejectd', reason});
+  const resolveHandler = value => ({ status: 'fulfilled', value});
+
+  Promise.allSettled = function (promise) {
+    const convertedPromises = promise.map(p => Promise.resolve(p).then(resolveHandler, rejectHandler));
+    return Promise.all(convertedPromises);
+  };
+}
