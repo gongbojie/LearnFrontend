@@ -104,3 +104,112 @@ alert( document.body instanceof HTMLBodyElement ); // true
 // outerHTML：元素的完整 HTML
 // outerHTML 属性包含了元素的完整 HTML。
 // 注意：与 innerHTML 不同，写入 outerHTML 不会改变元素。而是在 DOM 中替换它。
+
+// nodeValue/data：文本节点内容
+// innerHTML 属性仅对元素节点有效。
+let text = document.body.firstChild;
+alert(text.data); // Hello
+
+let comment = text.nextSibling;
+alert(comment.data); // comment
+
+// textContent：纯文本
+// textContent 提供了对元素内的 文本 的访问权限：仅文本，去掉所有 <tags>。
+
+// 写入 textContent 要有用得多，因为它允许以“安全方式”写入文本。
+/* 假设我们有一个用户输入的任意字符串，我们希望将其显示出来。
+  * 使用 innerHTML，我们将其 作为 HTML 插入， 带有所有HTML标签。
+  * 使用 textContent， 将其 作为文本插入，所有哦符号（symbol）均按字面意义处理
+*/
+
+// “hidden” 属性
+// “hidden” 特性（attribute）和 DOM 属性（property）指定元素是否可见。
+
+// 更多属性
+/*  元素还有其他属性，特别是那些依赖于 class 的属性：
+  * value — <input>，<select> 和 <textarea>（HTMLInputElement，HTMLSelectElement……）的 value。
+  * href — <a href="...">（HTMLAnchorElement）的 href。
+  * id — 所有元素（HTMLElement）的 “id” 特性（attribute）的值。
+*/
+
+// 特性和属性（Attributes and properties）
+// DOM 属性
+// DOM 节点是常规的 JavaScript 对象。我们可以 alert 它们。
+/* DOM 属性和方法的行为就像常规的 Javascript 对象一样：
+  * 它们可以有很多值。
+  * 它们是大小写敏感的（要写成 elem.nodeType，而不是 elem.NoDeTyPe）。
+*/
+
+// HTML 特性
+// 在 HTML 中，标签可能拥有特性（attributes）。当浏览器解析 HTML 文本，并根据标签创建 DOM 对象时，浏览器会辨别 标准的 特性并以此创建 DOM 属性。所以，当一个元素有 id 或其他 标准的 特性，那么就会生成对应的 DOM 属性。但是非 标准的 特性则不会。
+// 如果一个特性不是标准的，那么就没有相对应的 DOM 属性。
+/*  所有特性都可以通过使用以下方法进行访问：
+
+  * elem.hasAttribute(name) — 检查特性是否存在。
+  * elem.getAttribute(name) — 获取这个特性值。
+  * elem.setAttribute(name, value) — 设置这个特性值。
+  * elem.removeAttribute(name) — 移除这个特性。
+  
+* 这些方法操作的实际上是 HTML 中的内容。
+*/
+
+/*
+HTML 特性有以下几个特征：
+
+它们的名字是大小写不敏感的（id 与 ID 相同）。
+它们的值总是字符串类型的。
+
+1. getAttribute('About') — 这里的第一个字母是大写的，但是在 HTML 中，它们都是小写的。但这没有影响：特性的名称是大小写不敏感的。
+2. 我们可以将任何东西赋值给特性，但是这些东西会变成字符串类型的。所以这里我们的值为 "123"。
+3. 所有特性，包括我们设置的那个特性，在 outerHTML 中都是可见的。
+4. attributes 集合是可迭代对象，该对象将所有元素的特性（标准和非标准的）作为 name 和 value 属性存储在对象中。
+*/
+
+// 属性—特性同步
+// 当一个标准的特性被改变，对应的属性也会自动更新，（除了几个特例）反之亦然。
+// input.value 只能从特性同步到属性，反过来则不行
+
+// DOM 属性是多类型的
+// DOM 属性不总是字符串类型的。
+// input.checked 属性（对于 checkbox 的）是布尔型的
+// style 特性是字符串类型的，但 style 属性是一个对象
+
+// 非标准的特性，dataset
+// 有时，非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素。
+// 所有以 “data-” 开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。
+
+// 修改文档（document）
+// 创建一个元素
+// document.createElement(tag)
+// 用给定的标签创建一个新 元素节点（element node）：let div = document.createElement('div');
+// document.createTextNode(text)
+
+// 插入方法
+// append：document.body.append(div)。
+
+/*
+  * node.append(...nodes or strings) —— 在 node 末尾 插入节点或字符串，
+  * node.prepend(...nodes or strings) —— 在 node 开头 插入节点或字符串，
+  * node.before(...nodes or strings) —— 在 node 前面 插入节点或字符串，
+  * node.after(...nodes or strings) —— 在 node 后面 插入节点或字符串，
+  * node.replaceWith(...nodes or strings) —— 将 node 替换为给定的节点或字符串。
+*/
+
+// insertAdjacentHTML/Text/Element
+/* 该方法的第一个参数是代码字（code word），指定相对于 elem 的插入位置。必须为以下之一：
+  *  "beforebegin" — 将 html 插入到 elem 前插入，
+  *  "afterbegin" — 将 html 插入到 elem 开头，
+  *  "beforeend" — 将 html 插入到 elem 末尾，
+  *  "afterend" — 将 html 插入到 elem 后。
+*/
+// 第二个参数是 HTML 字符串，该字符串会被“作为 HTML” 插入。
+
+// 节点移除
+// 想要移除一个节点，可以使用 node.remove()。
+// 请注意：如果我们要将一个元素 移动 到另一个地方，则无需将其从原来的位置中删除。所有插入方法都会自动从旧位置删除该节点。
+
+// 克隆节点：cloneNode
+
+// DocumentFragment：是一个特殊的 DOM 节点，用作来传递节点列表的包装器（wrapper）。
+
+// 样式和类
