@@ -111,3 +111,41 @@ p {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 ```
+
+## system font stack
+
+## sizing fonts
+
+font-size: 1rem; // 1 x font size of the root element(html)
+
+type-scale.com
+
+## vertical spacing
+
+## horizontal spacing
+letter-spacing: 1px;
+word-spacing: 5px;
+
+ideal line length: should be between 50 - 70 characters.
+width: 50ch;
+
+## formatting text 文字排版
+
+# images
+image ypes and format
+
+raster image formats:jpeg gif png webp
+
+content images
+background images
+
+* background-repeat: no-repeat;
+* background-size: cover;
+* background-attachment: fixed;
+
+css sprites
+
+problems: 1. file size can get too large 2. sprites are not flexible
+
+## Data URLs
+
