@@ -149,3 +149,17 @@ problems: 1. file size can get too large 2. sprites are not flexible
 
 ## Data URLs
 
+## svg
+svgbackgrounds.com
+
+# form
+## creating a basic form
+
+## css framework
+
+## text fields
+
+## check boxes
+
+## animation
+animate.style -- website

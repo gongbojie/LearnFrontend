@@ -6,15 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link href="./styleTest.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
 </head>
 <body>
-  <div class="container">
-    <div class="box">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A, autem, architecto corrupti dignissimos ipsa quod dolore ea veniam aperiam nostrum aliquam consequatur quasi natus. Illum, voluptatem distinctio? Quia, soluta ex?</p>
+  <form>
+    <div>
+      <label for="name">Name</label>
+      <input type="text" required minlength="3" maxlength="10" />
     </div>
-    <div class="box">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident corporis natus non eius veniam nostrum est recusandae aspernatur neque quos enim quisquam vel similique, distinctio voluptatibus harum ipsa quo facilis.</p>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" />
     </div>
-  </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+    <button class="btn btn-secondary" type="reset">Clear</button>
+  </form>
 </body>
 </html>
