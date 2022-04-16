@@ -163,3 +163,36 @@ svgbackgrounds.com
 
 ## animation
 animate.style -- website
+
+# better css
+
+## css best practice
+
+best practices
+
+* follow a naming convention
+* create logical sections in your stylesheet
+* avoid over-specific selectors
+* avoid !important
+* sort css properties
+* take advantage of style inheritance
+* extract repetive patterns
+* avoid repetitive values (keep it DRY)
+
+## variables
+## object css
+## BEN block element modifier
+双短横线来隔开构造器的两个词
+
+双下划线来隔开两个元素
+
+```html
+<div class="card card--popular">
+  <header class="card__header">
+    <span class="card__price"></span>
+  </header>
+  <div class="card__body">
+    <button class="btn"></button>
+  </div>
+</div>
+```
