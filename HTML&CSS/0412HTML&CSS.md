@@ -196,3 +196,12 @@ best practices
   </div>
 </div>
 ```
+
+## 练习准备
+vs code插件
+
+1. HTML CSS Support
+2. CSS Peek
+3. Prettier
+4. Highlight Matching Tag
+5. Todo Hightlight
