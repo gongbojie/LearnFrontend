@@ -12,30 +12,51 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <section class="block container block-domain">
-    <header class="block__header">
-      <h2>Starting at $9 per month</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt doloribus maiores reiciendis iure laudantium animi nam. Quis consectetur amet eum dolorum sapiente blanditiis reprehenderit, accusamus est cupiditate molestias libero repellat!
-      </p>
-    </header>
-    <div class="input-group">
-      <input type="text" class="input" placeholder="Enter domain name here..." />
-      <button class="btn btn--accent">
-        <svg class="icon icon--white">
-          <use xlink:href="images/sprite.svg#search"></use>
-        </svg>Search
-      </button>
+  <!-- TODO: p41 展示模块-->
+  <footer class="block block--dark footer">
+    <div class="container grid footer__sections">
+      <section class="collapsible collapsible--expanded footer__section">
+        <header class="collapsible__header">
+          <h2 class="collapsible__heading footer__heading">Item 1</h2>
+          <svg class="icon icon--white collapsible__chevron">
+            <use xlink:href="images/sprite.svg#chevron"></use>
+          </svg>
+        </header>
+        <div class="collapsible__content">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus asperiores ipsum rerum. Maiores perferendis reprehenderit dolores quo numquam nobis necessitatibus. Id aliquid laborum cupiditate, distinctio repellendus laboriosam voluptatum modi deleniti?
+        </div>
+      </section>
+
+      <section class="collapsible footer__section">
+        <header class="collapsible__header">
+          <h2 class="collapsible__heading footer__heading">Item 2</h2>
+          <svg class="icon icon--white collapsible__chevron">
+            <use xlink:href="images/sprite.svg#chevron"></use>
+          </svg>
+        </header>
+        <div class="collapsible__content">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus asperiores ipsum rerum. Maiores perferendis reprehenderit dolores quo numquam nobis necessitatibus. Id aliquid laborum cupiditate, distinctio repellendus laboriosam voluptatum modi deleniti?
+        </div>
+      </section>
+
+      <section class="collapsible footer__section">
+        <header class="collapsible__header">
+          <h2 class="collapsible__heading footer__heading">Item 3</h2>
+          <svg class="icon icon--white collapsible__chevron">
+            <use xlink:href="images/sprite.svg#chevron"></use>
+          </svg>
+        </header>
+        <div class="collapsible__content">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus asperiores ipsum rerum. Maiores perferendis reprehenderit dolores quo numquam nobis necessitatibus. Id aliquid laborum cupiditate, distinctio repellendus laboriosam voluptatum modi deleniti?
+        </div>
+      </section>
+
+      <section class="footer__brand">
+        <img src="images/logo.svg" alt="">
+        <p class="footer__copyright">Copyright 2022</p>
+      </section>
     </div>
-    <ul class="list block-domain__prices">
-      <li><span class="badge badge--secondary">.com $9</span></li>
-      <li>.sg $10</li>
-      <li>.sg $10</li>
-      <li>.sg $10</li>
-      <li>.sg $10</li>
-      <li>.sg $10</li>
-    </ul>
-  </section>
+  </footer>
   <script src="js/main.js"></script>
 </body>
 </html> 
