@@ -11,7 +11,7 @@
   <div id="mask">
     <img :src="imgArr[index]" alt="">
     <a href="#" @click="prev" v-show="index!=0">上一张</a>
-    <a href="#" @click="next" v-show="index<imgArr.lengh-1">下一张</a>
+    <a href="#" @click="next" v-show="index<imgArr.length-1">下一张</a>
   </div>
 
   <!-- 开发环境版本，包含了有帮助的命令行警告 -->
@@ -20,13 +20,13 @@
     var app = new Vue({
       el: '#mask',
       data: {
-        imgArr:[
+        imgArr: [
           './images/1.png',
           './images/2.png',
         ],
         index:0
       },
-      methods:{
+      methods: {
         prev:function(){
           this.index--;
         },
