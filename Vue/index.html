@@ -27,7 +27,11 @@
       </div>
     </div>
     <ul class="weather_list">
-      <li v-for="item in weatherList"> {{ item }}</li>
+      <li v-for="item in weatherList">
+        <div class="info_type">
+          <span>  {{ item }} </span>
+        </div>
+      </li>
     </ul>
   </div>
   <!-- 开发环境版本，包含了有帮助的命令行警告 -->
