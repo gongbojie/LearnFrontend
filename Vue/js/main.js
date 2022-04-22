@@ -3,6 +3,7 @@ var app = new Vue ({
   data:{
     city:'',
     weatherList:[],
+    hotCitys: ["北京", "上海", "广州", "深圳"],
   },
   methods: {
     searchWeather: function() {
@@ -17,6 +18,10 @@ var app = new Vue ({
       .catch(function(err){
         console.log(err);
       })
+    },
+    changeCity:function(city){
+      this.city = city;
+      this.searchWeather();
     }
   },
 })
