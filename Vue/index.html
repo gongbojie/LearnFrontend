@@ -5,42 +5,85 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>First Vue</title>
-  <link rel="stylesheet" href="./css/index.css" />
+  <!-- <link rel="stylesheet" href="./css/index.css" /> -->
+  <style>
+    input {
+      margin: 10px;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <div class="wrap" id="app">
-    <div class="search_form">
-      <div class="logo">
-        <img src="./images/logo.png" alt="logo">
-      </div>
-      <div class="form_group">
-        <input type="text" v-model="city" @keyup.enter="searchWeather" class="input_txt" placeholder="请输入查询的天气">
-        <button class="input_sub" @click="searchWeather">
-          搜 索
-        </button>
-      </div>
-      <div class="hotkey">
-        <a href="#" v-for="city in hotCitys" @click="changeCity(city)">{{ city }}</a>
-      </div>
-    </div>
-    <ul class="weather_list">
-      <li v-for="item in weatherList">
-        <div class="info_type">
-          <span class="iconfont">  {{ item.type }} </span>
-        </div>
-        <div class="info_temp">
-          <b>{{ item.low }}</b>
-          ~
-          <b>{{ item.high }}</b>
-        </div>
-        <div class="info_date"><span>{{ item.date }}</span></div>
-      </li>
-    </ul>
-  </div>
-  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <script src="./js/main.js"></script>
+  <div id="app" v-cloak>
+
+    <login-form />
+
+    <hr />
+
+  </div>
+  
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://unpkg.com/vue@next"></script>
+
+
+  <script>
+    let app = Vue.createApp({
+      data: function() {
+        return {
+          greeting: 'Hello Vue 3!',
+          isVisible: false
+        }
+      },
+      methods: {
+        toggleBox() {
+          this.isVisible = !this.isVisible; 
+        }
+      }
+    })
+
+    app.component('login-form', {
+      template:`
+        <form @submit.prevent="handleSubmit">
+          <h1>{{ title }}</h1>
+          <custom-input type="email" v-bind:label="emailLabel" />
+          <custom-input type="password" v-bind:label="passwordLabel" />
+          <button>Log in</button>
+        </form>
+      `,
+      components: ['custom-input'],
+      data() {
+        return {
+          title:'Login Form',
+          email: '',
+          password: '',
+          emailLabel: 'Email',
+          passwordLabel: 'Password'
+        }
+      },
+      methods: {
+        handleSubmit() {
+          console.log(this.email, this.password);
+        }
+      }
+    })
+    
+    app.component('custom-input', {
+      template: `
+        <label>
+          {{ label }}
+          <input type="text" v-model="inputValue">
+        </label>
+      `,
+      props: ['label'],
+      data() {
+        return {
+          inputValue: ''
+        }
+      }
+    })
+    app.mount('#app');
+
+  </script>
 </body>
 </html>
