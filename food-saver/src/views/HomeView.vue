@@ -9,36 +9,55 @@
   </div>
   <div class="food-content">
     <van-tabs v-model:active="active">
-    <van-tab title="标签 1">
-      <van-empty
-        image="https://cdn.jsdelivr.net/npm/@vant/assets/custom-empty-image.png"
-        image-size="80"
-        description="暂时没有库存"
-      />
+      <van-tab v-for="(item, index) in tabArray" v-bind:key="index" :title="item">
+        <!-- 判断是否有数组，无数组显示空数据 -->
+        <van-empty v-if="contentArray[index] == undefined || contentArray[index].length <= 0" description="储藏间空空如也" />
+        <van-grid :border="false" v-else>
+          <van-grid-item v-for="item in contentArray[index]" :key="item.id">
+            <p class="item-emoji-icon">{{ item.icon }}</p>
+            <p class="item-title">{{ item.titleName }}</p>
+            <p class="item-count">
+              {{ item.restCount }}
+              <span class="item-unit">{{ item.unit }}</span>
 
-    </van-tab>
-    <van-tab title="标签 2">
-      <van-grid :column-num="3">
-        <van-grid-item v-for="value in 6" :key="value" icon="photo-o" text="文字" />
-      </van-grid>
-
-    </van-tab>
-    <van-tab title="标签 3">内容 3</van-tab>
-    <van-tab title="标签 4">内容 4</van-tab>
-    <van-tab title="标签 4">内容 4</van-tab>
-    <van-tab title="标签 4">内容 4</van-tab>
-    <van-tab title="标签 4">内容 4</van-tab>
-</van-tabs>
+            </p>
+          </van-grid-item>
+        </van-grid>
+      </van-tab>
+    </van-tabs>
   </div>
   <footer class="add-button">
-    <a href="#">
-      <img src="../assets/add_btn.png" alt="addItem" class="add-btn" @click="addItemClick">
-    </a>
+    <router-link :to="'/addItem/'" class="movie-link">
+      <img src="../assets/add_btn.png" alt="addItem" class="add-btn">
+    </router-link>
   </footer>
 </template>
 
 <script>
+import { ref } from 'vue';
+import const_value from '@/const.js'
+
 export default {
+  setup() {
+    const active = ref(0);
+    return { active };
+  },
+  data() {
+    return {
+      tabArray: const_value.tabArray,
+      contentArray:[
+        [
+          {icon:'🍪', titleName:'饼干', restCount:'5', unit:'袋', id: 1},
+          {icon:'🍰', titleName:'蛋糕', restCount:'5', unit:'块', id: 2}
+        ],
+        [
+          {icon:'🥩', titleName:'牛排', restCount:'5', unit:'块', id: 1},
+          {icon:'🐟', titleName:'鱼', restCount:'5', unit:'条', id: 2},
+          {icon:'🍚', titleName:'大米', restCount:'5', unit:'包', id: 3},
+        ]
+      ]
+    }
+  },
   methods: {
     addItemClick() {
       alert('addItemClick')
@@ -107,6 +126,23 @@ footer {
 .add-btn {
   width: 50px;
   height: 50px;
+}
+
+.item-emoji-icon {
+  font-size: 50px;
+}
+
+.item-title {
+  font-size: 15px;
+}
+
+.item-count {
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+.item-unit {
+  font-size: 15px;
 }
 
 </style>
