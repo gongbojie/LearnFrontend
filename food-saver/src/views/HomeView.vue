@@ -9,7 +9,7 @@
   </div>
   <div class="food-content">
     <van-tabs v-model:active="active">
-      <van-tab v-for="(item, index) in tabArray" v-bind:key="index" :title="item">
+      <van-tab v-for="(item, index) in tabArray" v-bind:key="index" :title="item.text">
         <!-- 判断是否有数组，无数组显示空数据 -->
         <van-empty v-if="contentArray[index] == undefined || contentArray[index].length <= 0" description="储藏间空空如也" />
         <van-grid :border="false" v-else>

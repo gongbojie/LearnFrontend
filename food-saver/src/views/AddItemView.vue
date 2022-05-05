@@ -89,9 +89,9 @@
           v-model="message"
           rows="1"
           autosize
-          label="留言"
+          label="备注"
           type="textarea"
-          placeholder="请输入留言"
+          placeholder="请输入备注"
         />
         
       </van-cell-group>
