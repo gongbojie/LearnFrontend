@@ -20,12 +20,12 @@
   </div>
 </template>
 
-<script scoped>
+<script>
 export default {
 }
 </script>
 
-<style>
+<style scoped>
 * {
   box-sizing: border-box;
   padding: 0;
