@@ -1,24 +1,98 @@
-body {
-  margin: 0;
-}
-
-ul.sidenav {
-  list-style-type: none;
+* {
   margin: 0;
   padding: 0;
-  width: 25%;
-  background-color: #f1f1f1;
-  position: fixed;
 }
 
-div.content {
-  margin-left: 25%;
-  padding: 1px 16px;
-  height: 1000px;
+/* 多媒体标题 */
+figcaption {
+  text-align: center;
+  line-height: 150px;
+  font-size: 24px;
 }
 
-@media screen and (max-width: 600px) {
-  ul.topnav li.right, ul.topnav li {
-    float: none;
-  } 
+/* 播放器 */
+.player {
+  width: 720px;
+  height: 360px;
+  margin: 10px auto;
+  border: 1px solid #000;
+  background: url(images/loading.gif) center no-repeat #000;
+  background-size: auto 100%;
+  position: relative;
+  border-radius: 20px;
+}
+
+.player video {
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 控制条 */
+.controls {
+  width: 700px;
+  height: 40px;
+  background-color: rgba(255, 255, 0, 0.3);
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  border-radius: 10px;
+}
+
+/* 开关 */
+.switch {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 10px;
+  top: 10px;
+
+  text-align: center;
+  line-height: 20px;
+  color: yellow;
+}
+
+/* 进度条 */
+.progress {
+  width: 432px;
+  height: 10px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.4);
+  left: 40px;
+  top: 15px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* 当前进度 */
+.curr-progress {
+  width: 50%;
+  height: 10px;
+  background-color: #fff;
+}
+
+/* 时间模块 */
+.time {
+  width: 120px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  color: #fff;
+  position: absolute;
+  left: 510px;
+  top: 10px;
+  font-size: 12px;
+}
+
+.extend {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+
+  right: 20px;
+  top: 10px;
+
+  text-align: center;
+  line-height: 20px;
+  color: yellow;
 }
