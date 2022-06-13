@@ -95,15 +95,34 @@
       m=m>=10?m:"0"+m;
       s=s>=10?s:"0"+s;
 
-      // 显示出当前时间
-      currTime.innerHTML= h + ":" + m + ":" + s;
-      // 改变进度条的宽度： 当前时间/总时间
-      var value = cTime/tTime;
-      currProgress.style.width = value*100+"%";
+      // 显示出来
+      totalTime.innerHTML = h + ":" + m + ":" + s;
      }
 
+     // 3. 当视频播放的时候，进度条同步，当前时间同步
+     video.ontimeupdate = function() {
+      // 获取当前视频的播放时间
+      var cTime = video.currentTime;
+      // 格式转换成00:00:00
+      var h = Math.floor(cTime/3600);
+      var m = Math.floor(cTime%3600/60);
+      var s = Math.floor(cTime%60);
+
+      h=h>=10?h:"0"+h;
+      m=m>=10?m:"0"+m;
+      s=s>=10?s:"0"+s;
+
+      // 显示出当前时间
+      currTime.innerHTML = h + ":" + m + ":" + s;
+
+      // 改变进度条的宽度： 当前时间/总时间
+      var value = cTime/tTime;
+
+      currProgress.style.width = value * 100 + "%";
+     }
+
+     // 全屏
      extend.onclick = function() {
-      // 全屏
       video.webkitRequestFullScreen();
      }
   </script>
