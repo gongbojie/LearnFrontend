@@ -7,11 +7,13 @@
 
 项目：
 人社部电子社保卡SDK
-1. 
+1. 熟悉framework的使用和打包
 
 掌上12333
 1. cocoapods的使用
-2. 自动化打包fastlane的使用
+2. 熟悉自动化打包fastlane的使用
+3. runtime修改文字大小
+4. 自定义安全键盘
 
 海南一卡通 
 
